@@ -1,5 +1,6 @@
 import os
 import csv
+import base64
 import pickle
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -27,43 +28,118 @@ def gmail_authenticate():
             pickle.dump(creds, token)
     return creds
 
+
 def create_dataset(service, query):
     results = service.users().messages().list(userId=our_email, q=query).execute()
-    messages = results.get('messages', [])
-
+    messages = results.get("messages", [])
     dataset = []
-    
+    count = 0
+
     if not messages:
-        print('No messages found.')
+        print("You have no New Messages.")
     else:
-        #print('Messages:')
         for message in messages:
             msg = service.users().messages().get(userId=our_email, id=message['id']).execute()
-            dataset.append(msg)
+            count +=1
+            
+            # Extracting 'From' and 'Subject' information from headers
+            from_name = next((value["value"] for value in msg["payload"]["headers"] if value["name"] == "From"), None)
+            subject = next((value["value"] for value in msg["payload"]["headers"] if value["name"] == "Subject"), None)
+
+            # Extracting text data from payload parts
+            for part in msg["payload"]["parts"]:
+                if part["mimeType"] == "text/plain":
+                    data = base64.urlsafe_b64decode(part["body"]["data"]).decode("utf-8")
+                    dataset.append({
+                        "From": from_name,
+                        "Subject": subject,
+                        "Data": data
+                    })
+    print(count)
 
     return dataset
 
 def write_to_csv(dataset, csv_filename='emails.csv'):
-    fields = ['Subject', 'From', 'To', 'Date', 'Snippet']
+    fields = ['From', 'Subject', 'Data']
 
     with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.DictWriter(csvfile, fieldnames=fields)
         csv_writer.writeheader()
 
-        for msg in dataset:
-            subject = msg['subject'] if 'subject' in msg else ''
-            sender = msg['from'] if 'from' in msg else ''
-            recipient = msg['to'] if 'to' in msg else ''
-            date = msg['date'] if 'date' in msg else ''
-            snippet = msg['snippet'] if 'snippet' in msg else ''
-
+        for email_data in dataset:
             csv_writer.writerow({
-                'Subject': subject,
-                'From': sender,
-                'To': recipient,
-                'Date': date,
-                'Snippet': snippet
+                'From': email_data.get('From', ''),
+                'Subject': email_data.get('Subject', ''),
+                'Data': email_data.get('Data', '')
             })
+
+
+# def create_dataset(service, query):
+    
+#     results = service.users().messages().list(userId=our_email, q=query).execute()
+
+#     messages = results.get("messages", [])
+#     dataset = []
+
+#     if not messages:
+#         print("You have no New Messages.")
+
+#     else:
+#         message_count = 0
+#         for message in messages:
+#             msg = service.users().messages().get(userId=our_email, id=message['id']).execute()
+#             message_count = message_count + 1
+#             email_data = msg["payload"]["headers"]
+#             for values in email_data:
+#                 name = values["name"]
+#                 if name == "From":
+#                     from_name = values["value"]
+#                     print("FROM")
+#                     print(from_name)
+#                     subject = [j["value"] for j in email_data if j["name"] == "Subject"]
+#                     print("SUBJECT")
+#                     print(subject)
+
+#             # I added the below script.
+#             for p in msg["payload"]["parts"]:
+#                 if p["mimeType"] in "text/plain":
+#                     data = base64.urlsafe_b64decode(p["body"]["data"]).decode("utf-8")
+#                     print(data)
+#                     dataset.append(data)
+#     return dataset
+    # results = service.users().messages().list(userId=our_email, q=query).execute()
+    # messages = results.get('messages', [])
+
+    # dataset = []
+    
+    # if not messages:
+    #     print('No messages found.')
+    # else:
+    #     #print('Messages:')
+    #     for message in messages:
+    #         msg = service.users().messages().get(userId=our_email, id=message['id']).execute()
+    #         dataset.append(msg)
+
+    # return dataset
+
+# def write_to_csv(dataset, csv_filename='emails.csv'):
+#     fields = ['Snippet', 'Text']
+
+#     with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
+#         csv_writer = csv.DictWriter(csvfile, fieldnames=fields)
+#         csv_writer.writeheader()
+
+#         for msg in dataset:
+#             snippet = msg['snippet'] if 'snippet' in msg else ''
+#             body = msg['body'] if 'body' in msg else ''
+#             text = body['data'] if 'data' in body else ''
+#             print(text)
+
+#             csv_writer.writerow({
+#                 'Snippet': snippet,
+#                 'Text': text
+#             })
+
 
 def main():
     creds = gmail_authenticate()
