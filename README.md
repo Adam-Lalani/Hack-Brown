@@ -8,9 +8,7 @@ npm run dev
 # or
 yarn dev
 ```
-##Features
-List the key features of your project. For example:
-
+## Features
 Data fetching from Gmail using the Gmail API
 Data preprocessing using Python, Pandas, and NLTK
 Application of the PageRank algorithm for scoring
