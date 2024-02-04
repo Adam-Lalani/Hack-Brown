@@ -13,7 +13,7 @@ def return_relevant_to_query(query):
     ### 
 
     # File paths for the CSV files
-    tfidf_matrix_file_path = 'nlp\\written_data\\tfidf_matrix.csv'  
+    tfidf_matrix_file_path = 'nlp/written_data/tfidf_matrix.csv'  
 
     # Load the TF-IDF matrix
     tfidf_df = pd.read_csv(tfidf_matrix_file_path)
@@ -43,7 +43,9 @@ def return_relevant_to_query(query):
 
     # Load IDF scores
     # Load IDF scores from CSV
-    idf_df = pd.read_csv('nlp\\written_data\\idf_df.csv')
+    
+    idf_df = pd.read_csv('/Users/morganlo/hackBrown/Hack-Brown/nlp/written_data/idf_df.csv')
+
     idf_dict = dict(zip(idf_df['Token'], idf_df['IDF']))
 
     # Count frequency of each token in flattened_list

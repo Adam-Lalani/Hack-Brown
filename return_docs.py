@@ -1,6 +1,7 @@
 # import files
 import sys
 import os
+import pandas as pd
 
 # Get the path of the parent directory of the current file
 parent_dir = os.path.dirname(os.path.abspath(__file__))
@@ -29,10 +30,9 @@ def get_docs_for_query(query: str) -> dict:
     # print("Indices of Top 3 Documents:", top_n_indices)
 
     # Now get the entries with these indices from emails_proc.csv and save them as dicts with fields for Subject and Data
-    import pandas as pd
 
     # Read the CSV into a DataFrame
-    df = pd.read_csv('nlp\\input_data\\emails_proc.csv')
+    df = pd.read_csv('/Users/morganlo/hackBrown/Hack-Brown/nlp/input_data/emails_proc.csv')
 
     # filter to the indices in top_n_indices
     top_n_df = df.iloc[top_n_indices]

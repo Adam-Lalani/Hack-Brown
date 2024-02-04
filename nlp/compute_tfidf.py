@@ -5,13 +5,15 @@ import nltk
 from nltk.corpus import wordnet as wn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import Counter
+from sklearn.feature_extraction.text import CountVectorizer
 
 # # Ensure you have the required NLTK data
 # nltk.download('wordnet')
 # nltk.download('punkt')
 
 # Load documents from a CSV file
-csv_file_path = 'nlp\\input_data\\emails_proc.csv' 
+csv_file_path = '/Users/morganlo/hackBrown/Hack-Brown/nlp/input_data/emails_proc.csv' 
 # Read the CSV into a DataFrame
 df = pd.read_csv(csv_file_path)
 doc_list = [f"{row['Subject']}{row['Data']}" for index, row in df.iterrows()]
@@ -25,11 +27,9 @@ tfidf_matrix = vectorizer.fit_transform(processed_documents)
 
 # Store tfidf_matrix as csv in same directory
 tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=vectorizer.get_feature_names_out())
-tfidf_df.to_csv('nlp\\written_data\\tfidf_matrix.csv')
+tfidf_df.to_csv('/Users/morganlo/hackBrown/Hack-Brown/nlp/written_data/tfidf_matrix.csv', index=False)
 
 ## Calculate frequency of tokens in doc list
-from collections import Counter
-from sklearn.feature_extraction.text import CountVectorizer
 
 # Tokenize and count occurrences
 # print("Processed Documents:", processed_documents)

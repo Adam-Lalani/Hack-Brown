@@ -1,0 +1,18 @@
+.result-container {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .result-content {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .result-container.active {
+    height: auto;
+  }
+  
