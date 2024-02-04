@@ -21,6 +21,7 @@ const Resultpage = () => {
   return (
     <div style={containerStyle} className="flex flex-col h-lvh">
       <Navbar />
+      <h1 className="text-white text-3xl flex mb-8">Suggested Events</h1>
       <div className="flex-col space-y-8 w-full">
         {searchResults.map((result, index) => (
           <Result key={index} data={result} />

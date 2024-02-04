@@ -24,15 +24,15 @@ const App = () => {
             <h1 className="text-white text-6xl font-bold mb-4">
               Tomorrow@Brown
             </h1>
-            <p className="text-white font-extralight text-3xl">
-              <span className="text-5xl font-bold">Blast off!</span> Find events
+            <p className="text-white font-extralight text-3xl mr-32">
+              <span className="text-3xl font-bold">Blast off!</span> Find events
               specific to your needs, or go{" "}
               <span className="italic">rogue</span> and venture out to the
               unknown!
             </p>
           </div>
           <Searchbar />
-          <p className="text-white text-lg font-extralight">
+          <p className="text-white text-lg font-extralight mr-36">
             Learn more about events at Brown by searching for tags such as
             non-professional, academic, artistic, etc. Or click{" "}
             <span className="underline cursor-pointer">here</span> for random
