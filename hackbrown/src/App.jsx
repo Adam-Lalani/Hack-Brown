@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import logoImage from "./assets/pxArt.png";
+import logoImage from "./assets/brownlogo.png";
 import Searchbar from "./components/Searchbar";
 
 const App = () => {
@@ -13,12 +13,7 @@ const App = () => {
     display: "flex",
     flexDirection: "column", // If you want to stack Navbar and content vertically
   };
-
-  const secondContainerStyle = {
-    backgroundImage: "url('src/assets/comet.png')",
-    backgroundRepeat: "no-repeat",
-    backgorundSize: "100% 100%",
-  };
+  
   return (
     <div style={containerStyle} className="flex flex-col h-lvh">
       <Navbar />
@@ -26,7 +21,7 @@ const App = () => {
         <div className="w-1/2"></div>
         <div
           className="ml-6 flex flex-col flex-grow w-1/2 p-2 justify-center h-lvh space-y-8"
-          style={secondContainerStyle}
+
         >
           <div className="flex flex-col mb-8">
             <h1 className="text-white text-6xl font-bold mb-4">
@@ -46,11 +41,11 @@ const App = () => {
             <span className="underline cursor-pointer">here</span> for random
             fun...
           </p>
-          <img
+          {/* <img
             src={logoImage}
             alt="Brown logo"
             className="absolute bottom-5 right-5 w-40 " // would need to crop the image...
-          />
+          /> */}
         </div>
       </div>
     </div>
