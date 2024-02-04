@@ -25,7 +25,7 @@ const About = () => {
             <span className="italic">mostly</span> first time hackers!
           </h1>
           <h1 className="text-white text-lg">
-            We decided to create _______ in order to create a website for
+            We decided to create Tomorrow@Brown in order to create a website for
             students at Brown University to easily access information about
             events here. Oftentimes, many events go unnoticed by students
             because information about the events were not communicated with

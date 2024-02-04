@@ -1,12 +1,11 @@
 import React from "react";
 
-const Result = () => {
+const Result = ({ data }) => {
   return (
-    <div className="w-3/5 h-64 rounded-lg bg-white flex flex-col">
-        <h1>insert name of event</h1>
-        <p>insert description of event</p>
-        <h1>insert location of event</h1>
-        <h1>insert date of event</h1>
+    <div className="w-3/5 h-64 rounded-lg bg-white flex flex-col p-4 overflow-auto">
+      <h1>{data.From}</h1>
+      <h2>{data.Subject}</h2>
+      <p>{data.Data}</p>
     </div>
   );
 };

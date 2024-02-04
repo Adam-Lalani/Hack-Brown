@@ -2,11 +2,14 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import parse_qs
 import json  # Import the JSON module
 from placeholder import placeholder
+from return_docs import get_docs_for_query
 
 class MyHandler(BaseHTTPRequestHandler):
     def handle_request(self, data):
         input_param = data.get('input', [''])[0]
-        response_data = placeholder(input_param)
+        response_data = get_docs_for_query(input_param)
+        print(response_data)
+        
 
         # Set CORS headers
         self.send_response(200)

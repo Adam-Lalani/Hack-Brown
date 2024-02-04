@@ -1,25 +1,30 @@
 import React from "react";
-import React, { useState, useEffect } from "react";
 import Result from "../components/Result.jsx";
+import Searchbar from "../components/Searchbar.jsx";
+import Navbar from "../components/Navbar.jsx";
+import { useLocation } from "react-router-dom";
 
 const Resultpage = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  const location = useLocation();
+  const searchResults = location.state?.results || [];
 
   const containerStyle = {
-    fontFamily: "'Inter', sans-serif", 
+    fontFamily: "'Inter', sans-serif",
     backgroundImage: "url('src/assets/result-background.png')",
     backgroundSize: "100% 100%",
     backgroundRepeat: "no-repeat",
-    height: "100vh", 
+    height: "100vh",
     display: "flex",
-    flexDirection: "column", 
+    flexDirection: "column",
   };
+
   return (
     <div style={containerStyle} className="flex flex-col h-lvh">
       <Navbar />
+      <h1 className="text-white text-3xl flex mb-8">Suggested Events</h1>
       <div className="flex-col space-y-8 w-full">
-        {searchResults.map((result) => (
-          <Result key={result.id} data={result} />
+        {searchResults.map((result, index) => (
+          <Result key={index} data={result} />
         ))}
       </div>
     </div>
