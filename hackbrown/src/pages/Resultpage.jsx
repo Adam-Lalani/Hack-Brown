@@ -1,6 +1,7 @@
 import React from "react";
 import React, { useState, useEffect } from "react";
 import Result from "../components/Result.jsx";
+import Searchbar from "../components/Searchbar.jsx";
 
 const Resultpage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -17,6 +18,7 @@ const Resultpage = () => {
   return (
     <div style={containerStyle} className="flex flex-col h-lvh">
       <Navbar />
+      <Searchbar />
       <div className="flex-col space-y-8 w-full">
         {searchResults.map((result) => (
           <Result key={result.id} data={result} />
