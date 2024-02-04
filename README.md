@@ -9,7 +9,7 @@ npm run dev
 yarn dev
 ```
 ## Features
-Data fetching from Gmail using the Gmail API
-Data preprocessing using Python, Pandas, and NLTK
-Application of the PageRank algorithm for scoring
+Data fetching from Gmail using the Gmail API<br />
+Data preprocessing using Python, Pandas, and NLTK<br />
+Application of the PageRank algorithm for scoring<br />
 Responsive frontend design using Tailwind, React, and CSS
