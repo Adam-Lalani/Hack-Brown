@@ -21,7 +21,11 @@ const router = createBrowserRouter([
     element: <Feedback />,
   },
   {
-    path: "/resultpage",
+    path: "/resultpage/", // Route without dynamic parameter
+    element: <Resultpage />,
+  },
+  {
+    path: "/resultpage/:query",
     element: <Resultpage />,
   },
 ]);
