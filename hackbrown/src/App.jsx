@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import logoImage from "./assets/brownlogo.png";
 import Searchbar from "./components/Searchbar";
+import { Link } from "react-router-dom";
 
 const App = () => {
   const containerStyle = {
@@ -13,16 +13,13 @@ const App = () => {
     display: "flex",
     flexDirection: "column", // If you want to stack Navbar and content vertically
   };
-  
+
   return (
     <div style={containerStyle} className="flex flex-col h-lvh">
       <Navbar />
       <div className="flex flex-row">
         <div className="w-1/2"></div>
-        <div
-          className="ml-6 flex flex-col flex-grow w-1/2 p-2 justify-center h-lvh space-y-8"
-
-        >
+        <div className="ml-6 flex flex-col flex-grow w-1/2 p-2 justify-center h-lvh space-y-8">
           <div className="flex flex-col mb-8">
             <h1 className="text-white text-6xl font-bold mb-4">
               Title of project goes here
@@ -41,11 +38,6 @@ const App = () => {
             <span className="underline cursor-pointer">here</span> for random
             fun...
           </p>
-          {/* <img
-            src={logoImage}
-            alt="Brown logo"
-            className="absolute bottom-5 right-5 w-40 " // would need to crop the image...
-          /> */}
         </div>
       </div>
     </div>
